@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "@angular/forms";
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "
 export class LoginComponent implements OnInit{
   title = 'Login';
   formLogin: FormGroup;
-  constructor(private formBuilder: FormBuilder,) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
     this.formLogin = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
       password: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]]
@@ -21,5 +22,6 @@ export class LoginComponent implements OnInit{
 
   login() {
     const dataPost = this.formLogin.value;
+    this.authService.login();
   }
 }

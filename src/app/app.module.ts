@@ -15,6 +15,7 @@ import {MainLayoutComponent} from "./components/main-layout/main-layout.componen
 import {SiteFooterComponent} from "./components/site-footer/site-footer.component";
 import {SiteHeaderComponent} from "./components/size-header/site-header.component";
 import {DashboardComponent} from "./_components/dashboard/dashboard.component";
+import { SiteNavbarComponent } from './components/site-navbar/site-navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {DashboardComponent} from "./_components/dashboard/dashboard.component";
     MainLayoutComponent,
     SiteFooterComponent,
     SiteHeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    SiteNavbarComponent
   ],
   imports: [
     BrowserModule,

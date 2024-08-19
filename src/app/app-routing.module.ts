@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./_components/login/login.component";
 import {DashboardComponent} from "./_components/dashboard/dashboard.component";
 import {MainLayoutComponent} from "./components/main-layout/main-layout.component";
-
+import { AuthGuard } from './auth/auth.service';
 
 const routes: Routes = [
   {
@@ -18,9 +18,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        data: { preload: true }
+        data: { preload: true },
+        canActivate: [AuthGuard]
       }
-    ]
+    ],
   },
   {
     path: 'login',
