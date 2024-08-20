@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit{
   formLogin: FormGroup;
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {
     this.formLogin = this.formBuilder.group({
-      userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
+      username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
       password: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]]
     })
   }
@@ -22,6 +22,6 @@ export class LoginComponent implements OnInit{
 
   login() {
     const dataPost = this.formLogin.value;
-    this.authService.login();
+    this.authService.login(dataPost);
   }
 }
