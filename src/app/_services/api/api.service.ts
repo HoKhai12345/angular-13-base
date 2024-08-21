@@ -17,23 +17,13 @@ export class ApiService {
   }
 
   // POST request
-  // post(path: string, data: any): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json'
-  //   });
-  //   return this.http.post(`${this.apiUrl}/${path}`, data, { headers });
-  // }
-
-  async post(path: string, data: any): Promise<any> {
+  post(path: string, data: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-
-    // Sử dụng lastValueFrom để chuyển Observable thành Promise
-    return await lastValueFrom(
-      this.http.post(`${this.apiUrl}/${path}`, data, { headers })
-    );
+    return this.http.post(`${this.apiUrl}/${path}`, data, { headers });
   }
+
 
   // PUT request
   put(id: string, data: any): Observable<any> {

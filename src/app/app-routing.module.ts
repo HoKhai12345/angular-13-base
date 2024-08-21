@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: { preload: true }
+    data: { preload: true },
   },
 
   /**

@@ -15,17 +15,25 @@ export class AuthService {
   constructor(private router: Router, private loginService: LoginService) {}
   
 
-  async login(data: {username: string, password: string}) {
-    const loginResult = await this.loginService.login(data) as any;
-    console.log("loginResult", loginResult);
-    if (!loginResult) {
-      this.loggedIn = false;
-    } else {
-      // xử lý logic
-      localStorage.setItem('accessToken', loginResult?.accessToken);
-      this.loggedIn = true;
-      this.router.navigate(['/dashboard']); // Điều hướng đến trang dashboard sau khi đăng nhập thành công  
-    }
+  login(data: {username: string, password: string}) {
+    this.loginService.login(data).subscribe(
+      (loginResult) => {
+        console.log("loginResult", loginResult);
+        if (!loginResult) {
+          this.loggedIn = false;
+        } else {
+          // xử lý logic
+          localStorage.setItem('accessToken', loginResult?.accessToken);
+          this.loggedIn = true;
+          console.log("VOOOOOO");
+          this.router.navigate(['/dashboard']); // Điều hướng đến trang dashboard sau khi đăng nhập thành công
+        }
+      },
+      (error) => {
+        console.error('Login failed', error);
+        this.loggedIn = false;
+      }
+    );
   }
 
 
@@ -36,6 +44,12 @@ export class AuthService {
   }
 
   isLoggedIn() {
+    // const token = localStorage.getItem('accessToken');
+    // if (token) {
+    //   this.router.navigate(['/dashboard']);
+    //   return false; // Prevent access to the login route
+    // }
+    // return true; // Allow access to the login route
     return this.loggedIn;
   }
 }
