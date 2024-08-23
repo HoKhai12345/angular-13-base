@@ -1,19 +1,37 @@
 <div class="wrapper">
   <div class="logo">
-    <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt="">
+    <img src="https://cdn-images-1.medium.com/v2/resize:fit:1200/1*fnPVSaFGoh-NO_IPFrSoaQ.png" alt="">
   </div>
   <div class="text-center mt-4 name">
-    Twitter
+    Strava
   </div>
   <form class="p-3 mt-3" [formGroup]="formLogin">
     <div class="form-field d-flex align-items-center">
       <span class="far fa-user"></span>
       <input type="text" formControlName="username" name="username" id="username" placeholder="Username">
     </div>
+    <span class="ms-2 ng-validate" *ngIf="formLogin.get('username')?.hasError('required') && formLogin.get('username')?.touched">
+      * username ko được để trống
+    </span>
+    <span class="ms-2 ng-validate" *ngIf="formLogin.get('username')?.hasError('minlength') && formLogin.get('username')?.touched">
+      * username cần có ít nhất 3 giá trị
+    </span>
+    <span class="ms-2 ng-validate" *ngIf="formLogin.get('username')?.hasError('maxlength') && formLogin.get('username')?.touched">
+      * username có nhiều nhất 15 giá trị
+    </span>
     <div class="form-field d-flex align-items-center">
       <span class="fas fa-key"></span>
       <input type="password" name="password" id="pwd" formControlName="password" placeholder="Password">
     </div>
+    <span class="ms-2 ng-validate" *ngIf="formLogin.get('password')?.hasError('required') && formLogin.get('password')?.touched">
+      * password ko được để trống
+    </span>
+    <span class="ms-2 ng-validate" *ngIf="formLogin.get('password')?.hasError('minlength') && formLogin.get('password')?.touched">
+      * password cần có ít nhất 3 giá trị
+    </span>
+    <span class="ms-2 ng-validate" *ngIf="formLogin.get('password')?.hasError('maxlength') && formLogin.get('password')?.touched">
+      * password có nhiều nhất 15 giá trị
+    </span>
     <button [disabled]="formLogin.invalid" (click)="login()" class="btn mt-3">Login</button>
   </form>
   <div class="text-center fs-6">
@@ -21,3 +39,4 @@
   </div>
 </div>
 <pre>{{ formLogin.value | json }}</pre>
+<pre>{{ formLogin.get('username')?.errors | json }}</pre>

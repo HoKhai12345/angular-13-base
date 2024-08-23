@@ -4,6 +4,7 @@ import {LoginComponent} from "./_components/login/login.component";
 import {DashboardComponent} from "./_components/dashboard/dashboard.component";
 import {MainLayoutComponent} from "./components/main-layout/main-layout.component";
 import { AuthGuard } from './auth/auth.service';
+import { LoginGuard } from './auth/login-guard.service';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: { preload: true },
+    canActivate: [LoginGuard]
   },
 
   /**

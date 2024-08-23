@@ -44,12 +44,13 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    // const token = localStorage.getItem('accessToken');
-    // if (token) {
-    //   this.router.navigate(['/dashboard']);
-    //   return false; // Prevent access to the login route
-    // }
-    // return true; // Allow access to the login route
-    return this.loggedIn;
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      console.log("vào đây");
+      // this.router.navigate(['/dashboard']);
+      return true; // Prevent access to the login route
+    }
+    return false; // Allow access to the login route
+    // return this.loggedIn;
   }
 }
