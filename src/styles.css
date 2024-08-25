@@ -35,3 +35,23 @@
     font-size: 13px;
   }
   
+  /* src/app/app.component.css */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.blur {
+  filter: blur(5px); /* Điều chỉnh giá trị px để thay đổi mức độ mờ */
+  /* pointer-events: none; Vô hiệu hóa các sự kiện chuột trên phần bị mờ */
+}
+
+.spinner-custom {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1000; /* Đảm bảo overlay hiển thị phía trên mọi thứ */
+}

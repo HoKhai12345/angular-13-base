@@ -10,28 +10,22 @@ export class AuthService {
     throw new Error('Method not implemented.');
   }
 
-  private loggedIn = false;
-
   constructor(private router: Router, private loginService: LoginService) {}
   
 
   login(data: {username: string, password: string}) {
     this.loginService.login(data).subscribe(
       (loginResult) => {
-        console.log("loginResult", loginResult);
         if (!loginResult) {
-          this.loggedIn = false;
         } else {
           // xử lý logic
           localStorage.setItem('accessToken', loginResult?.accessToken);
-          this.loggedIn = true;
-          console.log("VOOOOOO");
-          this.router.navigate(['/dashboard']); // Điều hướng đến trang dashboard sau khi đăng nhập thành công
+          console.log("________");
+          this.router.navigate(['/dashboard']);
         }
       },
       (error) => {
         console.error('Login failed', error);
-        this.loggedIn = false;
       }
     );
   }
@@ -39,14 +33,12 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('accessToken'); // Xóa khỏi local storage
-    this.loggedIn = false;
     this.router.navigate(['/login']); // Điều hướng đến trang login khi đăng xuất
   }
 
   isLoggedIn() {
     const token = localStorage.getItem('accessToken');
     if (token) {
-      console.log("vào đây");
       // this.router.navigate(['/dashboard']);
       return true; // Prevent access to the login route
     }

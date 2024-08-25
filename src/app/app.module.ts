@@ -7,7 +7,7 @@ import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatInputModule} from "@angular/material/input";
@@ -16,6 +16,9 @@ import {SiteFooterComponent} from "./components/site-footer/site-footer.componen
 import {SiteHeaderComponent} from "./components/size-header/site-header.component";
 import {DashboardComponent} from "./_components/dashboard/dashboard.component";
 import { SiteNavbarComponent } from './components/site-navbar/site-navbar.component';
+import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.interceptor';
+import { LoaderInterceptor } from './interceptor/loader.interceptor';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { SiteNavbarComponent } from './components/site-navbar/site-navbar.compon
     SiteFooterComponent,
     SiteHeaderComponent,
     DashboardComponent,
-    SiteNavbarComponent
+    SiteNavbarComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,18 @@ import { SiteNavbarComponent } from './components/site-navbar/site-navbar.compon
     MatButtonModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
