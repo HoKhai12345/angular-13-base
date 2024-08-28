@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit{
   title = 'Login';
   formLogin: FormGroup;
   isLoading = this.loaderService.loaderState;
+  checkValidate = false
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private loaderService: LoaderService) {
     this.formLogin = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit{
 
   login() {
     const dataPost = this.formLogin.value;
-    this.authService.login(dataPost);
+    this.authService.login(dataPost).subscribe((isLogin) => {
+      !isLogin ? this.checkValidate = true : this.checkValidate = false
+    });
   }
 }

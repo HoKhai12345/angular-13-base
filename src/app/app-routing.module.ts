@@ -5,6 +5,7 @@ import {DashboardComponent} from "./_components/dashboard/dashboard.component";
 import {MainLayoutComponent} from "./components/main-layout/main-layout.component";
 import { LoginGuard } from './auth/login-guard.service';
 import { AuthGuard } from './auth/auth-guard.service';
+import { UsersComponent } from './_components/users/users.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,12 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+        data: { preload: true },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'user',
+        component: UsersComponent,
         data: { preload: true },
         canActivate: [AuthGuard]
       }

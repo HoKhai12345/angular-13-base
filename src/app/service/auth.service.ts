@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login/login.service';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,20 @@ export class AuthService {
   constructor(private router: Router, private loginService: LoginService) {}
   
 
-  login(data: {username: string, password: string}) {
-    this.loginService.login(data).subscribe(
-      (loginResult) => {
-        if (!loginResult) {
-        } else {
-          // xử lý logic
-          localStorage.setItem('accessToken', loginResult?.accessToken);
-          console.log("________");
+  login(data: { username: string; password: string }): Observable<boolean> {
+    return this.loginService.login(data).pipe(
+      tap((loginResult) => {
+        if (loginResult) {
+          // Xử lý logic khi đăng nhập thành công
+          localStorage.setItem('accessToken', loginResult.accessToken);
           this.router.navigate(['/dashboard']);
         }
-      },
-      (error) => {
-        console.error('Login failed', error);
-      }
+      }),
+      map((loginResult) => !!loginResult), // Trả về true nếu loginResult tồn tại, ngược lại là false
+      catchError((error) => {
+        console.error('Đăng nhập thất bại', error);
+        return of(false); // Trả về false nếu có lỗi xảy ra
+      })
     );
   }
 

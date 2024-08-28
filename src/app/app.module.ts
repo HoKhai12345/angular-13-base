@@ -19,6 +19,7 @@ import { SiteNavbarComponent } from './components/site-navbar/site-navbar.compon
 import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.interceptor';
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
+import { UsersComponent } from './_components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     SiteHeaderComponent,
     DashboardComponent,
     SiteNavbarComponent,
-    LoaderComponent
+    LoaderComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

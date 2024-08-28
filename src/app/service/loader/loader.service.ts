@@ -16,9 +16,9 @@ export class LoaderService {
   }
 
   hideLoader() {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.loaderSubject.next(false);
-    }, 1000);
+    // }, 1000);
   }
 
   get isLoading(): boolean {

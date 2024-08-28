@@ -5,7 +5,12 @@
   <div class="text-center mt-4 name">
     Strava
   </div>
-  <form class="p-3 mt-3" [formGroup]="formLogin">
+  <div class="text-center">
+    <span class="ms-2 ng-validate" *ngIf="checkValidate">
+      * Sai thông tin đăng nhập
+    </span>
+  </div>
+  <form class="p-3" [formGroup]="formLogin">
     <div class="form-field d-flex align-items-center">
       <span class="far fa-user"></span>
       <input type="text" formControlName="username" name="username" id="username" placeholder="Username">
