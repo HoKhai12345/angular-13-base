@@ -8,6 +8,8 @@ export const environment = {
     featureToggle: true, // Một số cờ để kích hoạt tính năng cho dev
     pathBackend: {
         login: 'login',
+        verifyToken: 'verify-token',
+        refreshToken: 'refresh-token',
         user: {
           getList: 'news/users/index'
         }

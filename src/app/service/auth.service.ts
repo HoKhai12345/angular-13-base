@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login/login.service';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private refreshTokenInProgress = false;
+
   static login() {
     throw new Error('Method not implemented.');
   }
@@ -20,6 +22,7 @@ export class AuthService {
         if (loginResult) {
           // Xử lý logic khi đăng nhập thành công
           localStorage.setItem('accessToken', loginResult.accessToken);
+          localStorage.setItem('refreshToken', loginResult.refreshToken);
           this.router.navigate(['/dashboard']);
         }
       }),
@@ -31,19 +34,88 @@ export class AuthService {
     );
   }
 
+  setTokens(accessToken: string, refreshToken: string) {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem('accessToken');
+  }
+
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refreshToken');
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    return this.isLoggedIn();
+  }
+
+  refreshAccessToken(): Observable<any> {
+    if (this.refreshTokenInProgress) {
+      return throwError(() => new Error('Refresh in progress'));
+    }
+
+    this.refreshTokenInProgress = true;
+    return this.loginService.refreshAccessToken({token: this.getRefreshToken()}).pipe(
+      tap((result) => {
+        if (result) {
+          this.setTokens(result.accessToken, this.getRefreshToken()!);
+          this.refreshTokenInProgress = false;  
+          return result.accessToken;
+        }
+      }),
+      map((loginResult) => !!loginResult), // Trả về true nếu loginResult tồn tại, ngược lại là false
+      catchError((error) => {
+        this.logout();
+        return throwError(() => new Error('Session expired, please log in again.'));
+      })
+    );
+  }
+
 
   logout() {
     localStorage.removeItem('accessToken'); // Xóa khỏi local storage
     this.router.navigate(['/login']); // Điều hướng đến trang login khi đăng xuất
   }
-
-  isLoggedIn() {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      // this.router.navigate(['/dashboard']);
-      return true; // Prevent access to the login route
+ 
+  isLoggedIn():any {
+    const token = localStorage.getItem('accessToken') ?? null;
+    if (!token) {
+        return of (false)
     }
-    return false; // Allow access to the login route
-    // return this.loggedIn;
+    console.log("token", token);
+   return this.loginService.checkVerifyToken(token).pipe(
+    tap((checkToken) => {
+      if (checkToken.status === 1) {
+        console.log("checkToken", checkToken);
+      }
+    }),
+    map((checkToken) => !!checkToken),
+    catchError((error) => {
+      console.error('Check token thất bại', error);
+      return of(false);
+    })
+   )
+  }
+
+  isLoggedInLoginCheck():any {
+    const token = localStorage.getItem('accessToken') ?? null;
+    if (!token) {
+        return of (true)
+    }
+    console.log("token", token);
+   return this.loginService.checkVerifyToken(token).pipe(
+    tap((checkToken) => {
+      if (checkToken.status === 1) {
+        console.log("checkToken", checkToken);
+      }
+    }),
+    map((checkToken) => !!checkToken),
+    catchError((error) => {
+      console.error('Check token thất bại', error);
+      return of(false);
+    })
+   )
   }
 }
