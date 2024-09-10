@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-site-navbar',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./site-navbar.component.css']
 })
 export class SiteNavbarComponent {
-  title = 'Site Navbar';
+  constructor(
+    private route: ActivatedRoute
+  ) {
+
+  }
 }

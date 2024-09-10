@@ -10,8 +10,8 @@ import { UsersComponent } from './_components/users/users.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
+    redirectTo: '/dashboard',
+    pathMatch: 'full',
   },
   {
     path: '',

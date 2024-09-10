@@ -104,14 +104,13 @@ export class AuthService {
     if (!token) {
         return of (true)
     }
-    console.log("token", token);
    return this.loginService.checkVerifyToken(token).pipe(
     tap((checkToken) => {
       if (checkToken.status === 1) {
-        console.log("checkToken", checkToken);
+        console.log("checkToken===================", checkToken);
       }
     }),
-    map((checkToken) => !!checkToken),
+    map((checkToken) => !!checkToken.status),
     catchError((error) => {
       console.error('Check token thất bại', error);
       return of(false);

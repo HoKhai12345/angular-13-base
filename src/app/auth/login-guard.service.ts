@@ -13,7 +13,6 @@ export class LoginGuard implements CanActivate {
   canActivate(): boolean {
     return this.authService.isLoggedInLoginCheck().pipe(
       map((checkVerify: boolean) => {
-        console.log("checkVerify", checkVerify);
         if (checkVerify) {
           return true; // Token hợp lệ
         } else {
