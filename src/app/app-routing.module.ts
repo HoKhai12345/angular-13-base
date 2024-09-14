@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'user',
         component: UsersComponent,
         data: { preload: true },
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       }
     ],
   },

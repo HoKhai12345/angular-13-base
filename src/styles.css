@@ -5,36 +5,44 @@
 * {
     border-radius: 5px;
   }
-  
+
+  .app-content {
+    position: absolute;
+    left: 226px;
+    top: 80px;
+    z-index: -1;
+    width: -webkit-fill-available;
+  }
+
   body.thumb {
     transform: scale(0.4);
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
   }
-  
+
   main {
     min-height: 80vh;
   }
-  
+
   [class*='container'] {
     border: 1px dashed #eee;
     background-clip: content-box;
   }
-  
+
   .row [class*='col'] {
     /* background-color: #efefef; */
     background-clip: content-box;
   }
-  
+
   .nav-item {
-    background-color: #eeeeff;
-    background-clip: content-box;
+    /*background-color: #eeeeff;*/
+    /*background-clip: content-box;*/
   }
 
   .ng-validate {
     color: red;
     font-size: 13px;
   }
-  
+
   /* src/app/app.component.css */
 .loader {
   position: fixed;

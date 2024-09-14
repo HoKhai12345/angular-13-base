@@ -2,3 +2,9 @@
 .header-box {
     background-color: #03A9F4;
 }
+
+.navbar-expand {
+  width: -webkit-fill-available;
+  position: fixed;
+  left: 226px;
+}
