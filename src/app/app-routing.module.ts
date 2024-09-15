@@ -21,13 +21,13 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         data: { preload: true },
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'user',
         component: UsersComponent,
         data: { preload: true },
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
       }
     ],
   },
