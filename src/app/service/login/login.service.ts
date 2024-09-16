@@ -50,7 +50,6 @@ export class LoginService {
     const path = environment.pathBackend.verifyToken;
     return this.apiService.post(path, bodyCheckToken).pipe(
       map((result) => {
-        console.log("result", result);
         if (result.status === 1) {
           return {
             code: result.code,

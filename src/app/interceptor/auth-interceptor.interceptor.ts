@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { API_CONFIG } from '../global';
+import { Global } from '../global';
 
 @Injectable()
 export class AuthInterceptorInterceptor implements HttpInterceptor {
@@ -14,7 +14,7 @@ export class AuthInterceptorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const excludedUrls = API_CONFIG.excludedUrls;
+    const excludedUrls = Global.excludedUrls;
     const isExcludedUrl = excludedUrls.some(url => request.url.includes(url));
     if (isExcludedUrl) {
       return next.handle(request);

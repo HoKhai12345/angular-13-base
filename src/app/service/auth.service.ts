@@ -84,11 +84,9 @@ export class AuthService {
     if (!token) {
         return of (false)
     }
-    console.log("token", token);
    return this.loginService.checkVerifyToken(token).pipe(
     tap((checkToken) => {
       if (checkToken.status === 1) {
-        console.log("checkToken", checkToken);
       }
     }),
     map((checkToken) => !!checkToken),
@@ -107,7 +105,6 @@ export class AuthService {
    return this.loginService.checkVerifyToken(token).pipe(
     tap((checkToken) => {
       if (checkToken.status === 1) {
-        console.log("checkToken===================", checkToken);
       }
     }),
     map((checkToken) => !!checkToken.status),

@@ -13,7 +13,6 @@ export class LoaderComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const contentContainer = document.querySelector('#content-container');
-    console.log("contentContainer", contentContainer, this.isLoading);
     if (contentContainer) {
       this.isLoading.subscribe(isLoading => {
         if (isLoading) {

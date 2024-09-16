@@ -1,4 +1,4 @@
-export const API_CONFIG = {
+export const Global = {
     baseUrl: '',
     excludedUrls: [
       '/api/login',
@@ -7,4 +7,18 @@ export const API_CONFIG = {
       '/api/verify-token'
     ],
     timeout: 5000, // Thời gian timeout cho các request
+    listHeader: [
+      {
+        "label": "Dashboard",
+        "icon": "fas fa-th",
+        "link": 'dashboard',
+        "value": 'dashboard'
+      },
+      {
+        "label": "User",
+        "icon": "fas fa-users",
+        "link": 'user',
+        "value": 'user'
+      }
+    ]
   };

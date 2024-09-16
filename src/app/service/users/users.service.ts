@@ -14,9 +14,7 @@ export class UsersService {
     const path = environment.pathBackend.user.getList;
     return this.apiService.get(path, options).pipe(
       map(result => {
-        console.log("result====", result);
         if (result.status === 1) {
-          console.log("result", result);
           return {
           
           };
