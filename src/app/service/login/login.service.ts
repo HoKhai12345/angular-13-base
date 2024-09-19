@@ -27,7 +27,7 @@ export class LoginService {
     );
   }
 
-  refreshAccessToken(data: { token: string | null}): Observable<any> {
+  refreshAccessToken(data: { refreshToken: string | null}): Observable<any> {
     const path = environment.pathBackend.refreshToken;
     return this.apiService.post(path, data).pipe(
       map(result => {

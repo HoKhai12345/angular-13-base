@@ -20,6 +20,7 @@ export class AuthService {
     return this.loginService.login(data).pipe(
       tap((loginResult) => {
         if (loginResult) {
+          console.log("loginResult", loginResult);
           // Xử lý logic khi đăng nhập thành công
           localStorage.setItem('accessToken', loginResult.accessToken);
           localStorage.setItem('refreshToken', loginResult.refreshToken);
@@ -57,7 +58,7 @@ export class AuthService {
     }
 
     this.refreshTokenInProgress = true;
-    return this.loginService.refreshAccessToken({token: this.getRefreshToken()}).pipe(
+    return this.loginService.refreshAccessToken({refreshToken: this.getRefreshToken()}).pipe(
       tap((result) => {
         if (result) {
           this.setTokens(result.accessToken, this.getRefreshToken()!);
