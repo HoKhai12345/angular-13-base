@@ -50,17 +50,14 @@ export class LoginService {
     const path = environment.pathBackend.verifyToken;
     return this.apiService.post(path, bodyCheckToken).pipe(
       map((result) => {
-        if (result.status === 1) {
-          return {
-            code: result.code,
-            status: result.status,
-            message: result.message
-          };
-        }
-        return false;
+        return {
+          code: result.code,
+          status: result.status,
+          message: result.message
+        };
       })
     );
   }
 
-  
+
 }

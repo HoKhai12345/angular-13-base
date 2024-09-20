@@ -20,6 +20,7 @@ import { AuthInterceptorInterceptor } from './interceptor/auth-interceptor.inter
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
 import { UsersComponent } from './_components/users/users.component';
+import {Error404Component} from "./components/404-error/404-error.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UsersComponent } from './_components/users/users.component';
     DashboardComponent,
     SiteNavbarComponent,
     LoaderComponent,
-    UsersComponent
+    UsersComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

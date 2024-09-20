@@ -6,12 +6,17 @@ import {MainLayoutComponent} from "./components/main-layout/main-layout.componen
 import { LoginGuard } from './auth/login-guard.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { UsersComponent } from './_components/users/users.component';
+import {Error404Component} from "./components/404-error/404-error.component";
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full',
+  },
+  {
+    path: 'error-404',
+    component: Error404Component,
   },
   {
     path: '',
@@ -41,7 +46,7 @@ const routes: Routes = [
   /**
    * Page 404
    */
-  { path: '**', redirectTo: 'error/404.html' },
+  { path: '**', redirectTo: 'error-404' },
 ];
 
 @NgModule({

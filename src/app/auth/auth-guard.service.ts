@@ -13,18 +13,20 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     return this.authService.isLoggedIn().pipe(
       map((checkVerify: boolean) => {
-        console.log("checkVerify", checkVerify);
         if (checkVerify) {
           return true; // Token hợp lệ
         } else {
           // xử lý lấy refresh token
           this.authService.refreshAccessToken().subscribe((result) => {
-            console.log("result", result);
+            if (!result) {
+              localStorage.removeItem('accessToken');
+              this.router.navigate(['/login']); // Token không hợp lệ, điều hướng đến login
+              return true;
+            }
+            console.log("result", result)
             return result;
           });
-          localStorage.removeItem('accessToken');
-          this.router.navigate(['/login']); // Token không hợp lệ, điều hướng đến login
-          return false;
+            return false;
         }
       }),
       catchError((error) => {

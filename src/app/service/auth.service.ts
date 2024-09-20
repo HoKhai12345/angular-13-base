@@ -14,13 +14,12 @@ export class AuthService {
   }
 
   constructor(private router: Router, private loginService: LoginService) {}
-  
+
 
   login(data: { username: string; password: string }): Observable<boolean> {
     return this.loginService.login(data).pipe(
       tap((loginResult) => {
         if (loginResult) {
-          console.log("loginResult", loginResult);
           // Xử lý logic khi đăng nhập thành công
           localStorage.setItem('accessToken', loginResult.accessToken);
           localStorage.setItem('refreshToken', loginResult.refreshToken);
@@ -48,10 +47,6 @@ export class AuthService {
     return localStorage.getItem('refreshToken');
   }
 
-  isAuthenticated(): Observable<boolean> {
-    return this.isLoggedIn();
-  }
-
   refreshAccessToken(): Observable<any> {
     if (this.refreshTokenInProgress) {
       return throwError(() => new Error('Refresh in progress'));
@@ -62,7 +57,7 @@ export class AuthService {
       tap((result) => {
         if (result) {
           this.setTokens(result.accessToken, this.getRefreshToken()!);
-          this.refreshTokenInProgress = false;  
+          this.refreshTokenInProgress = false;
           return result.accessToken;
         }
       }),
@@ -79,7 +74,7 @@ export class AuthService {
     localStorage.removeItem('accessToken'); // Xóa khỏi local storage
     this.router.navigate(['/login']); // Điều hướng đến trang login khi đăng xuất
   }
- 
+
   isLoggedIn():any {
     const token = localStorage.getItem('accessToken') ?? null;
     if (!token) {
@@ -87,8 +82,11 @@ export class AuthService {
     }
    return this.loginService.checkVerifyToken(token).pipe(
     tap((checkToken) => {
-      if (checkToken.status === 1) {
+      console.log("____________________", checkToken);
+      if (checkToken.code === 403 || checkToken.status === 1) {
+         return of (true)
       }
+      return of (false)
     }),
     map((checkToken) => !!checkToken),
     catchError((error) => {

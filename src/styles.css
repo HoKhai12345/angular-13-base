@@ -6,6 +6,10 @@
     border-radius: 5px;
   }
 
+  body {
+    background: radial-gradient(#f70303, transparent);
+  }
+
   .app-content {
     position: absolute;
     left: 226px;
