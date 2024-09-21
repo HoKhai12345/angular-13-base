@@ -27,6 +27,18 @@ export class LoginService {
     );
   }
 
+  logout(refreshToken: string | null) {
+    const data = {
+      refreshToken: refreshToken
+    }
+    const path = environment.pathBackend.logout;
+    return this.apiService.post(path, data).pipe(
+      map(result => {
+        return result
+      })
+    );
+  }
+
   refreshAccessToken(data: { refreshToken: string | null}): Observable<any> {
     const path = environment.pathBackend.refreshToken;
     return this.apiService.post(path, data).pipe(

@@ -55,7 +55,6 @@ export class AuthService {
     this.refreshTokenInProgress = true;
     return this.loginService.refreshAccessToken({refreshToken: this.getRefreshToken()}).pipe(
       tap((result) => {
-        console.log("result======================", result);
         if (result) {
           this.setTokens(result.accessToken, this.getRefreshToken()!);
           this.refreshTokenInProgress = false;
@@ -72,8 +71,13 @@ export class AuthService {
 
 
   logout() {
-    localStorage.removeItem('accessToken'); // Xóa khỏi local storage
-    this.router.navigate(['/login']); // Điều hướng đến trang login khi đăng xuất
+    this.loginService.logout(this.getRefreshToken()).subscribe((result) => {
+        console.log("result", result);
+        if (result?.status === 1) {
+          localStorage.removeItem('accessToken'); // Xóa khỏi local storage
+          this.router.navigate(['/login']); // Điều hướng đến trang login khi đăng xuất
+        }
+    })
   }
 
   isLoggedIn():any {
@@ -83,7 +87,6 @@ export class AuthService {
     }
    return this.loginService.checkVerifyToken(token).pipe(
     tap((checkToken) => {
-      console.log("____________________", checkToken);
       if (checkToken.code === 403 || checkToken.status === 1) {console.log("vào đây");
          return of (checkToken)
       }

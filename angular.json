@@ -95,6 +95,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "liveReload": false
+          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
