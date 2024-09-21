@@ -55,6 +55,7 @@ export class AuthService {
     this.refreshTokenInProgress = true;
     return this.loginService.refreshAccessToken({refreshToken: this.getRefreshToken()}).pipe(
       tap((result) => {
+        console.log("result======================", result);
         if (result) {
           this.setTokens(result.accessToken, this.getRefreshToken()!);
           this.refreshTokenInProgress = false;
@@ -83,12 +84,12 @@ export class AuthService {
    return this.loginService.checkVerifyToken(token).pipe(
     tap((checkToken) => {
       console.log("____________________", checkToken);
-      if (checkToken.code === 403 || checkToken.status === 1) {
-         return of (true)
+      if (checkToken.code === 403 || checkToken.status === 1) {console.log("vào đây");
+         return of (checkToken)
       }
       return of (false)
     }),
-    map((checkToken) => !!checkToken),
+    // map((checkToken) => !!checkToken),
     catchError((error) => {
       console.error('Check token thất bại', error);
       return of(false);
