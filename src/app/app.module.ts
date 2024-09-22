@@ -21,6 +21,7 @@ import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderComponent } from './components/loader/loader.component';
 import { UsersComponent } from './_components/users/users.component';
 import {Error404Component} from "./components/404-error/404-error.component";
+import { ChannelComponent } from './_components/channel/channel.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {Error404Component} from "./components/404-error/404-error.component";
     SiteNavbarComponent,
     LoaderComponent,
     UsersComponent,
-    Error404Component
+    Error404Component,
+    ChannelComponent
   ],
   imports: [
     BrowserModule,

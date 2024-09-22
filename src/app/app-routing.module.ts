@@ -7,6 +7,7 @@ import { LoginGuard } from './auth/login-guard.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { UsersComponent } from './_components/users/users.component';
 import {Error404Component} from "./components/404-error/404-error.component";
+import { ChannelComponent } from './_components/channel/channel.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,12 @@ const routes: Routes = [
       {
         path: 'user',
         component: UsersComponent,
+        data: { preload: true },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'channel',
+        component: ChannelComponent,
         data: { preload: true },
         canActivate: [AuthGuard]
       }

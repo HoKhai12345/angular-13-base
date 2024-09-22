@@ -13,6 +13,9 @@ export const environment = {
         refreshToken: 'refresh-token',
         user: {
           getList: 'news/users/index'
+        },
+        channel: {
+          getList: 'channel/get-all'
         }
     }
 };
