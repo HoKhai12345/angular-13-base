@@ -100,21 +100,19 @@ export class AuthService {
    )
   }
 
-  isLoggedInLoginCheck():any {
+  isLoggedInLoginCheck():any  {
     const token = localStorage.getItem('accessToken') ?? null;
     if (!token) {
         return of (true)
     }
    return this.loginService.checkVerifyToken(token).pipe(
-    tap((checkToken) => {
-      if (checkToken.status === 1) {
-      }
+    map((result: any) => {
+      return result.status !== 1;
     }),
-    map((checkToken) => !!checkToken.status),
     catchError((error) => {
-      console.error('Check token thất bại', error);
-      return of(false);
+      console.error("Error verifying token", error);
+      return of(false); // Return false in case of error
     })
-   )
+  );
   }
 }

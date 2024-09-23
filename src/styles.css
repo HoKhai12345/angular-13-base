@@ -47,6 +47,54 @@
     font-size: 13px;
   }
 
+  .box-thumbnail {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden; /* Đảm bảo phần ảnh thừa ngoài khung tròn bị ẩn đi */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid white;
+  }
+  .box-thumbnail img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .box-add-channel {
+    border: 1px black dashed;
+    height: 155px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 100px; */
+    /* height: 100px; */
+    background-color: #f0f0f0;
+    border-radius: 10px;
+  }
+
+  .box-add-channel:hover {
+    background: rgb(240, 210, 210);
+  }
+
+  .box-channel {
+    border: #000000 10px solid;
+  }
+
+  .box-channel:hover {
+    background: radial-gradient(black, transparent);
+  }
+
+  .box-right-channel {
+    float: right;
+    top: 15%;
+    position: relative;
+    right: 10%;
+  }
+
   /* src/app/app.component.css */
 .loader {
   position: fixed;
@@ -66,4 +114,12 @@
   left: 50%;
   top: 50%;
   z-index: 1000; /* Đảm bảo overlay hiển thị phía trên mọi thứ */
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.fs-50 {
+  font-size: 50px;
 }
