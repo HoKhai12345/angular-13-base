@@ -43,3 +43,9 @@
     <a href="#">Forget password?</a> or <a href="#">Sign up</a>
   </div>
 </div>
+<div *ngIf="(showPopup$ | async)" class="popup">
+  <p>Login thành công!</p>
+  <button (click)="closePopup()">Đóng</button>
+</div>
+
+<app-alerts *ngIf="(showPopup$ | async)"></app-alerts>

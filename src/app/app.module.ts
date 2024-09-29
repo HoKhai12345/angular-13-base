@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import {LoginComponent} from "./_components/login/login.component";
 import {RouterModule} from "@angular/router";
@@ -22,6 +22,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { UsersComponent } from './_components/users/users.component';
 import {Error404Component} from "./components/404-error/404-error.component";
 import { ChannelComponent } from './_components/channel/channel.component';
+import { authReducer } from 'src/store/reducers/auth.reducer';
+import { AlertsComponent } from './components/alerts/alerts.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { ChannelComponent } from './_components/channel/channel.component';
     LoaderComponent,
     UsersComponent,
     Error404Component,
-    ChannelComponent
+    ChannelComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { ChannelComponent } from './_components/channel/channel.component';
     MatButtonModule,
     MatCheckboxModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    StoreModule.forRoot({ auth: authReducer })
   ],
   providers: [
     {
