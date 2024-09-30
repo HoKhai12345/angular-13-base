@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { LoginService } from './login/login.service';
+import { loginFailure, loginSuccess } from '../../store/actions/auth.actions';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,7 +15,7 @@ export class AuthService {
     throw new Error('Method not implemented.');
   }
 
-  constructor(private router: Router, private loginService: LoginService) {}
+  constructor(private router: Router, private loginService: LoginService, private store: Store<{auth: { showLoginPopup: boolean }}>) {}
 
 
   login(data: { username: string; password: string }): Observable<boolean> {
@@ -23,8 +25,10 @@ export class AuthService {
           // Xử lý logic khi đăng nhập thành công
           localStorage.setItem('accessToken', loginResult.accessToken);
           localStorage.setItem('refreshToken', loginResult.refreshToken);
-          this.router.navigate(['/dashboard']);
+          // this.router.navigate(['/dashboard']);
+          this.store.dispatch(loginSuccess());
         }
+        this.store.dispatch(loginFailure());
       }),
       map((loginResult) => !!loginResult), // Trả về true nếu loginResult tồn tại, ngược lại là false
       catchError((error) => {

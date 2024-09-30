@@ -1,0 +1,8 @@
+
+.box-alert {
+    position: fixed;
+    right: 0;
+    top: 20%;
+    width: 100%;
+    z-index: 1000;
+}

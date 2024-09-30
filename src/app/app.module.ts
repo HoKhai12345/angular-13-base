@@ -22,7 +22,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { UsersComponent } from './_components/users/users.component';
 import {Error404Component} from "./components/404-error/404-error.component";
 import { ChannelComponent } from './_components/channel/channel.component';
-import { authReducer } from 'src/store/reducers/auth.reducer';
+import { authReducer, demoReducer } from 'src/store/reducers/auth.reducer';
 import { AlertsComponent } from './components/alerts/alerts.component';
 
 @NgModule({
@@ -52,7 +52,7 @@ import { AlertsComponent } from './components/alerts/alerts.component';
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
-    StoreModule.forRoot({ auth: authReducer })
+    StoreModule.forRoot({ auth: authReducer, demo: demoReducer })
   ],
   providers: [
     {
