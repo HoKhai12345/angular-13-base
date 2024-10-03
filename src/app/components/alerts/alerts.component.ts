@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -6,15 +6,20 @@ import { Store } from '@ngrx/store';
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css']
 })
-export class AlertsComponent implements OnInit {
+export class AlertsComponent implements OnInit, OnChanges {
+
+  activeAlert = false;
   showPopup$ = this.store.select((state) => {
-    state.auth.showLoginPopup
+    console.log("+++++++++", state, state.auth.activeAlert);
+    return state.auth.activeAlert;
 });
 
-  constructor( private store: Store<{auth: { showLoginPopup: boolean }}>) { }
+  constructor( private store: Store<{auth: { showLoginPopup: boolean, activeAlert: boolean }}>) { }
 
-  ngOnInit(): void {
-  console.log("showPopup$", this.showPopup$);
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("showPopup$", this.showPopup$);
   }
  
  

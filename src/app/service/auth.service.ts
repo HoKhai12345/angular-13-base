@@ -21,12 +21,13 @@ export class AuthService {
   login(data: { username: string; password: string }): Observable<boolean> {
     return this.loginService.login(data).pipe(
       tap((loginResult) => {
+        console.log(":loginResult", loginResult);
         if (loginResult) {
           // Xử lý logic khi đăng nhập thành công
           localStorage.setItem('accessToken', loginResult.accessToken);
           localStorage.setItem('refreshToken', loginResult.refreshToken);
-          // this.router.navigate(['/dashboard']);
           this.store.dispatch(loginSuccess());
+          this.router.navigate(['/dashboard']);
         }
         this.store.dispatch(loginFailure());
       }),
