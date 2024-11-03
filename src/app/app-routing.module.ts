@@ -8,6 +8,8 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { UsersComponent } from './_components/users/users.component';
 import {Error404Component} from "./components/404-error/404-error.component";
 import { ChannelComponent } from './_components/channel/channel.component';
+import {TaskListComponent} from "./_components/task/task-list/task-list.component";
+import {TaskComponent} from "./_components/task/task.component";
 
 const routes: Routes = [
   {
@@ -38,6 +40,12 @@ const routes: Routes = [
       {
         path: 'channel',
         component: ChannelComponent,
+        data: { preload: true },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'task',
+        component: TaskComponent,
         data: { preload: true },
         canActivate: [AuthGuard]
       }

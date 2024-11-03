@@ -1,7 +1,29 @@
-<div *ngIf=" showPopup$ | async" class="alert alert-success box-alert" role="alert">
-    A simple primary alert—check it out!
+
+  <div *ngIf="alertSubject">
+    <div class="alert alert-danger alert-dismissible box-alert" *ngIf="alertSubject.type === 'error'">
+      <button type="button" class="close" (click)="closeAlert()" data-dismiss="alerts" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+      {{ alertSubject.text }}
+     </div>
+     <div class="alert alert-success alert-dismissible box-alert" *ngIf="alertSubject.type === 'success'">
+      <button type="button" class="close" (click)="closeAlert()" data-dismiss="alerts" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-check"></i> Alert!</h5>
+      {{ alertSubject.text }}
+    </div>
   </div>
 
-
-  <pre>111</pre>
-  <pre>{{ activeAlert }}</pre>
+  <!-- <div class="alert alert-info alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-info"></i> Alert!</h5>
+    Info alert preview. This alert is dismissable.
+  </div>
+  <div class="alert alert-warning alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+    Warning alert preview. This alert is dismissable.
+  </div>
+  <div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-check"></i> Alert!</h5>
+    Success alert preview. This alert is dismissable.
+  </div> -->

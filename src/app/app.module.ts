@@ -24,6 +24,15 @@ import {Error404Component} from "./components/404-error/404-error.component";
 import { ChannelComponent } from './_components/channel/channel.component';
 import { authReducer } from 'src/store/reducers/auth.reducer';
 import { AlertsComponent } from './components/alerts/alerts.component';
+import { ButtonComponent } from './shared/common/button/button.component';
+import { SubChannelComponent } from './_components/channel/sub-channel/sub-channel.component';
+import {MatCardModule} from "@angular/material/card";
+import { TestStringComponent } from './_components/test-string/test-string.component';
+import { TestColumnComponent } from './_components/test-column/test-column.component';
+import { TestTableComponent } from './_components/test-table/test-table.component';
+import { TaskFormComponent } from './_components/task/task-form/task-form.component';
+import { TaskListComponent } from './_components/task/task-list/task-list.component';
+import {TaskComponent} from "./_components/task/task.component";
 
 @NgModule({
   declarations: [
@@ -38,22 +47,31 @@ import { AlertsComponent } from './components/alerts/alerts.component';
     UsersComponent,
     Error404Component,
     ChannelComponent,
-    AlertsComponent
+    AlertsComponent,
+    ButtonComponent,
+    SubChannelComponent,
+    TestStringComponent,
+    TestColumnComponent,
+    TestTableComponent,
+    TaskComponent,
+    TaskFormComponent,
+    TaskListComponent
   ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatInputModule,
-    StoreModule.forRoot({ auth: authReducer })
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatInputModule,
+        StoreModule.forRoot({auth: authReducer}),
+        MatCardModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

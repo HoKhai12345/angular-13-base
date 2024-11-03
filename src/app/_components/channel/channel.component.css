@@ -1,0 +1,8 @@
+button {
+    transition: background-color 0.5s, transform 0.3s;
+  }
+  
+  .submitted {
+    background-color: #4caf50; /* Xanh lá báo thành công */
+    transform: scale(1.1); /* Phóng to nhẹ khi thành công */
+  }

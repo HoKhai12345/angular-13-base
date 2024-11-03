@@ -1,28 +1,46 @@
 import { Injectable } from '@angular/core';
-import { lastValueFrom, map, Observable } from 'rxjs';
+import { lastValueFrom, map, Observable, tap } from 'rxjs';
 import { ApiService } from 'src/app/_services/api/api.service';
 import { environment } from 'src/environments/environment';
+
+interface Result<T> {
+  status: number,
+  message: string,
+  data: T
+}
+
+interface UserDataLogin {
+  accessToken: string;
+  refreshToken: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class LoginService {
 
   constructor(private apiService: ApiService) { }
 
 
-  login(data: {username: string, password: string}): Observable<any> {
+  login(data: {username: string, password: string}): Observable<Result<UserDataLogin | null>> {
     const path = environment.pathBackend.login;
     return this.apiService.post(path, data).pipe(
+      tap((result) => {console.log("Operator tap =====", result)}),
       map(result => {
-        if (result.status === 1) {
+          let dataResult;
+          if (result?.status === 1) {
+              dataResult = {
+                accessToken: result.accessToken,
+                refreshToken: result.refreshToken,  
+              }
+          }
           return {
-            accessToken: result.accessToken,
-            refreshToken: result.refreshToken,
             status: result.status,
-            message: result.message
+            message: result.message,
+            data: dataResult ?? null
           };
-        }
-        return false;
       })
     );
   }

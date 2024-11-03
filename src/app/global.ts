@@ -25,6 +25,12 @@ export const Global = {
         "icon": "fas fa-home",
         "link": 'channel',
         "value": 'channel'
+      },
+      {
+        "label": "Task",
+        "icon": "fas fa-home",
+        "link": 'task',
+        "value": 'task'
       }
     ]
   };

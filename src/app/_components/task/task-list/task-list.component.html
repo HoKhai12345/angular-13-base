@@ -1,0 +1,15 @@
+<!--<ul>-->
+<!--  <li *ngFor="let task of tasks$ | async">-->
+<!--    {{ task.name }} - <strong>{{ task.completed ? 'Hoàn thành' : 'Chưa hoàn thành' }}</strong>-->
+<!--  </li>-->
+<!--</ul>-->
+<div class="row">
+  <div *ngFor="let task of tasks$ | async" class="card w-100 col-4">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKL9P_i4_QuYZD_aOa0sko8uRv_ubZqvfpgsqy2k2sX7OckuVhY6-9SZvj1-wy9ftkgIk&usqp=CAU" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5>{{ task.name }}</h5>
+      <button class="btn btn-primary" *ngIf="!task.completed" (click)="saveComplete(task.id)">Xác nhận</button>
+      <button class="btn btn-success" *ngIf="task.completed">Đã Xác nhận</button>
+    </div>
+  </div>
+</div>

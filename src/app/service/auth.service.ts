@@ -5,6 +5,12 @@ import { LoginService } from './login/login.service';
 import { loginFailure, loginSuccess } from '../../store/actions/auth.actions';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
+interface Result {
+  status: number,
+  message: string,
+  data: any
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,23 +24,20 @@ export class AuthService {
   constructor(private router: Router, private loginService: LoginService, private store: Store<{auth: { showLoginPopup: boolean }}>) {}
 
 
-  login(data: { username: string; password: string }): Observable<boolean> {
-    return this.loginService.login(data).pipe(
-      tap((loginResult) => {
-        console.log(":loginResult", loginResult);
-        if (loginResult) {
-          // Xử lý logic khi đăng nhập thành công
-          localStorage.setItem('accessToken', loginResult.accessToken);
-          localStorage.setItem('refreshToken', loginResult.refreshToken);
-          this.store.dispatch(loginSuccess());
-          this.router.navigate(['/dashboard']);
+  login(dataLogin: { username: string; password: string }): Observable<Result | null> {
+    return this.loginService.login(dataLogin).pipe(
+      tap((result) => {
+        console.log("_)_____________________", result);
+        if (result.status === 1) {
+        // Xử lý logic khi đăng nhập thành công
+        result.data?.accessToken ? localStorage.setItem('accessToken', result.data.accessToken) : '';
+        result.data?.refreshToken ? localStorage.setItem('refreshToken', result.data.refreshToken) : '';
         }
-        this.store.dispatch(loginFailure());
       }),
-      map((loginResult) => !!loginResult), // Trả về true nếu loginResult tồn tại, ngược lại là false
+      map((result) => result), // Trả về true nếu loginResult tồn tại, ngược lại là false
       catchError((error) => {
         console.error('Đăng nhập thất bại', error);
-        return of(false); // Trả về false nếu có lỗi xảy ra
+        return of(null);
       })
     );
   }
