@@ -27,7 +27,6 @@ export class AuthService {
   login(dataLogin: { username: string; password: string }): Observable<Result | null> {
     return this.loginService.login(dataLogin).pipe(
       tap((result) => {
-        console.log("_)_____________________", result);
         if (result.status === 1) {
         // Xử lý logic khi đăng nhập thành công
         result.data?.accessToken ? localStorage.setItem('accessToken', result.data.accessToken) : '';
@@ -56,21 +55,16 @@ export class AuthService {
   }
 
   refreshAccessToken(): Observable<any> {
-    if (this.refreshTokenInProgress) {
-      return throwError(() => new Error('Refresh in progress'));
-    }
-
-    this.refreshTokenInProgress = true;
     return this.loginService.refreshAccessToken({refreshToken: this.getRefreshToken()}).pipe(
       tap((result) => {
         if (result) {
           this.setTokens(result.accessToken, this.getRefreshToken()!);
-          this.refreshTokenInProgress = false;
           return result.accessToken;
         }
       }),
       map((loginResult) => !!loginResult), // Trả về true nếu loginResult tồn tại, ngược lại là false
       catchError((error) => {
+        console.log("error", error);
         this.logout();
         return throwError(() => new Error('Session expired, please log in again.'));
       })
@@ -80,12 +74,21 @@ export class AuthService {
 
   logout() {
     this.loginService.logout(this.getRefreshToken()).subscribe((result) => {
-        console.log("result", result);
         if (result?.status === 1) {
           localStorage.removeItem('accessToken'); // Xóa khỏi local storage
+          localStorage.removeItem('refreshToken'); // Xóa khỏi local storage
           this.router.navigate(['/login']); // Điều hướng đến trang login khi đăng xuất
         }
     })
+  }
+
+  isTokenExpired(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp < Date.now() / 1000; // So sánh thời gian hết hạn với thời gian hiện tại
+    } catch (e) {
+      return true; // Token không hợp lệ
+    }
   }
 
   isLoggedIn():any {
@@ -93,19 +96,24 @@ export class AuthService {
     if (!token) {
         return of (false)
     }
-   return this.loginService.checkVerifyToken(token).pipe(
-    tap((checkToken) => {
-      if (checkToken.code === 403 || checkToken.status === 1) {console.log("vào đây");
-         return of (checkToken)
-      }
-      return of (false)
-    }),
-    // map((checkToken) => !!checkToken),
-    catchError((error) => {
-      console.error('Check token thất bại', error);
-      return of(false);
-    })
-   )
+
+    if (token && !this.isTokenExpired(token)) {
+      return of (true);
+    } else {
+      return this.refreshAccessToken().pipe(
+        tap((checkToken) => {
+          if (checkToken.code === 403 || checkToken.status === 1) {console.log("vào đây");
+            return of (checkToken)
+          }
+          return of (false)
+        }),
+        // map((checkToken) => !!checkToken),
+        catchError((error) => {
+          console.error('Check token thất bại', error);
+          return of(false);
+        })
+      )
+    }
   }
 
   isLoggedInLoginCheck():any  {

@@ -31,6 +31,12 @@ export const Global = {
         "icon": "fas fa-home",
         "link": 'task',
         "value": 'task'
+      },
+      {
+        "label": "Product",
+        "icon": "fa-brands fa-product-hunt",
+        "link": 'products',
+        "value": 'products'
       }
     ]
   };

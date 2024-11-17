@@ -1,0 +1,41 @@
+<div class="content-wrapper">
+  <div class="row p-2">
+    <div class="col-xl-12 d-flex">
+      <h2>Products</h2>
+      <div class="float-lg-right w-100 text-right">
+        <button class="btn-success btn mt-2" (click)="addProduct()"> + Add Product</button>
+      </div>
+    </div>
+    <div class="col-xl-12 d-flex">
+      <button (click)="setFilter('all')">All</button>
+      <button (click)="setFilter('completed')">Completed</button>
+      <button (click)="setFilter('incomplete')">In completed</button>
+    </div>
+    <div class="col-xl-12 d-flex">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Completed</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products">
+          <th scope="row">{{ product.id }}</th>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <div (click)="changeComplete(product.id)" class="alert " [ngClass]="product.complete ? 'alert-primary' : 'alert-danger'" role="alert">
+              {{ product.complete }}
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <pre>{{ products | json }}</pre>
+
+    </div>
+  </div>
+</div>

@@ -12,6 +12,17 @@
     </li>
   </ul>
 
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Action
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a *ngFor="let value of header" class="dropdown-item">{{ value.label }}</a>
+<!--      <a class="dropdown-item">Another action</a>-->
+<!--      <a class="dropdown-item">Something else here</a>-->
+    </div>
+  </div>
+
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <!-- Navbar Search -->

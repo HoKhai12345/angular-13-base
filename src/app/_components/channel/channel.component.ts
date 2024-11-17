@@ -7,6 +7,8 @@ import {VisualizeService} from "../../_services/visualize/visualize.service";
 import {debounceTime, delay, distinctUntilChanged, filter, map, of, reduce, scan, Subscription, switchMap} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {SearchService} from "../../_services/search/search.service";
+import {TestService} from "../../_services/test/test.service";
+import {HeaderModel} from "../../models/header.model";
 
 @Component({
   selector: 'app-channel',
@@ -38,11 +40,13 @@ export class ChannelComponent implements OnInit, AfterViewInit {
   searchControl = new FormControl();
   searchResults: string[] = [];
   private subscription!: Subscription;
+  listHeader: HeaderModel[] | undefined;
 
-  constructor(private searchService: SearchService, private channelService: ChannelService, private alertService: AlertService, private visualizeService: VisualizeService) { }
+  constructor(private searchService: SearchService, private testService: TestService , private channelService: ChannelService, private alertService: AlertService, private visualizeService: VisualizeService) { }
 
 
   ngOnInit(): void {
+    this.getHeader();
     const fakeApiCall = (userId: number) => of(`User Data for ${userId}`).pipe(delay(1000));
 
     of(1, 2, 3).pipe(
@@ -118,4 +122,13 @@ export class ChannelComponent implements OnInit, AfterViewInit {
       setTimeout(() => resolve(), 1000); // Giả lập thời gian tải lên 1 giây
     });
   }
+
+  getHeader() {
+    this.listHeader = this.testService.getHeader();
+  }
+
+  addHeader(header: HeaderModel) {
+      this.testService.addHeader(header);
+  }
+
 }

@@ -19,9 +19,7 @@ export class TaskFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-        throw new Error('Method not implemented.');
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.taskForm.valid) {

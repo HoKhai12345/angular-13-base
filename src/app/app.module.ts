@@ -33,6 +33,7 @@ import { TestTableComponent } from './_components/test-table/test-table.componen
 import { TaskFormComponent } from './_components/task/task-form/task-form.component';
 import { TaskListComponent } from './_components/task/task-list/task-list.component';
 import {TaskComponent} from "./_components/task/task.component";
+import { ProductsComponent } from './_components/products/products.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {TaskComponent} from "./_components/task/task.component";
     TestTableComponent,
     TaskComponent,
     TaskFormComponent,
-    TaskListComponent
+    TaskListComponent,
+    ProductsComponent
   ],
     imports: [
         BrowserModule,

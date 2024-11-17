@@ -3,6 +3,10 @@ import { AlertService } from 'src/app/_services/alert/alert.service';
 import { ChannelModel } from 'src/app/models/channel.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { ChannelService } from 'src/app/service/channel/channel.service';
+import {Global} from "../../global";
+import {TestService} from "../../_services/test/test.service";
+import {Subject} from "rxjs";
+import {HeaderModel} from "../../models/header.model";
 
 @Component({
   selector: 'app-site-header',
@@ -13,11 +17,18 @@ export class SiteHeaderComponent implements OnInit {
   title = 'Main Layout';
   channelItem: ChannelModel[] = [];
   subject: any;
-  constructor(private authService: AuthService, private channelService: ChannelService, private alertService: AlertService) {
-
+  listHeader = Global.listHeader;
+  header: HeaderModel[] | undefined = Global.listHeader;
+  constructor(private authService: AuthService, private testService: TestService, private channelService: ChannelService, private alertService: AlertService) {
+    this.testService.headerItems$.subscribe(headerItems => {
+      console.log("headerItems", headerItems);
+      this.header = this.testService.getHeader();
+    })
   }
 
   ngOnInit(): void {
+    this.testService.setHeader(this.listHeader);
+    this.header = this.testService.getHeader();
     this.channelService.channelItems$.subscribe((items) => {
         this.channelItem = items
     })
