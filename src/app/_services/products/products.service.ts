@@ -65,9 +65,16 @@ export class ProductsService {
     this.filterSubject.next(filter);
   }
 
+  deleteItem(id: number): void {
+    const currentProduct = this.productSubject.value;
+    const products = currentProduct.filter((pr: any) => pr.id !== id);
+    this.productSubject.next(products);
+  }
+
   addProduct(product: IProduct): void {
     const currentProduct = this.productSubject.value;
     // @ts-ignore
     this.productSubject.next([...currentProduct, product]);
   }
+
 }

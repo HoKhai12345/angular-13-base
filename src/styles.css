@@ -10,6 +10,10 @@
     /*background: radial-gradient(#f70303, transparent);*/
   }
 
+  .label-validate {
+    color: red !important;
+  }
+
   .app-content {
     position: absolute;
     left: 226px;

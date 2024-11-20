@@ -3,13 +3,15 @@
     <div class="col-xl-12 d-flex">
       <h2>Products</h2>
       <div class="float-lg-right w-100 text-right">
-        <button class="btn-success btn mt-2" (click)="addProduct()"> + Add Product</button>
+        <button class="btn-success btn mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="createProduct()"> + Add Product</button>
       </div>
     </div>
     <div class="col-xl-12 d-flex">
-      <button (click)="setFilter('all')">All</button>
-      <button (click)="setFilter('completed')">Completed</button>
-      <button (click)="setFilter('incomplete')">In completed</button>
+      <select class="form-select w-25" (change)="onFilterChange($event)" aria-label="Default select example">
+        <option value="all" selected>All</option>
+        <option value="completed">Completed</option>
+        <option value="incomplete">In completed</option>
+      </select>
     </div>
     <div class="col-xl-12 d-flex">
       <table class="table">
@@ -19,6 +21,7 @@
           <th scope="col">Name</th>
           <th scope="col">Price</th>
           <th scope="col">Completed</th>
+          <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -27,15 +30,25 @@
           <td>{{ product.name }}</td>
           <td>{{ product.price }}</td>
           <td>
-            <div (click)="changeComplete(product.id)" class="alert " [ngClass]="product.complete ? 'alert-primary' : 'alert-danger'" role="alert">
+            <div (click)="changeComplete(product.id)" class="alert w-50" [ngClass]="product.complete ? 'alert-primary' : 'alert-danger'" role="alert">
               {{ product.complete }}
             </div>
+          </td>
+          <td>
+            <i (click)="deleteProduct(product.id)" class="fa-solid fa-trash"></i>
           </td>
         </tr>
         </tbody>
       </table>
-      <pre>{{ products | json }}</pre>
-
     </div>
   </div>
 </div>
+<app-modal
+  (save)="onSaveCreate()"
+  title="{{ titleCreateProduct }}"
+  modalId="exampleModal"
+  (onClose)="onModalClose()">
+  <!-- Nội dung body -->
+  <app-create-product #formContent>
+  </app-create-product>
+</app-modal>

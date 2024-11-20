@@ -34,6 +34,8 @@ import { TaskFormComponent } from './_components/task/task-form/task-form.compon
 import { TaskListComponent } from './_components/task/task-list/task-list.component';
 import {TaskComponent} from "./_components/task/task.component";
 import { ProductsComponent } from './_components/products/products.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { CreateProductComponent} from './_components/products/dialog/create/create.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { ProductsComponent } from './_components/products/products.component';
     TaskComponent,
     TaskFormComponent,
     TaskListComponent,
-    ProductsComponent
+    ProductsComponent,
+    ModalComponent,
+    CreateProductComponent
   ],
     imports: [
         BrowserModule,
