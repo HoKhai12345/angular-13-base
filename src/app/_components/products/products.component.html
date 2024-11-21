@@ -3,7 +3,7 @@
     <div class="col-xl-12 d-flex">
       <h2>Products</h2>
       <div class="float-lg-right w-100 text-right">
-        <button class="btn-success btn mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="createProduct()"> + Add Product</button>
+        <button class="btn-success btn mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="openModal()"> + Add Product</button>
       </div>
     </div>
     <div class="col-xl-12 d-flex">
@@ -43,12 +43,12 @@
     </div>
   </div>
 </div>
-<app-modal
-  (save)="onSaveCreate()"
-  title="{{ titleCreateProduct }}"
-  modalId="exampleModal"
-  (onClose)="onModalClose()">
-  <!-- Nội dung body -->
-  <app-create-product #formContent>
-  </app-create-product>
-</app-modal>
+<!--<app-modal-->
+<!--  (save)="onSaveCreate()"-->
+<!--  title="{{ titleCreateProduct }}"-->
+<!--  modalId="exampleModal"-->
+<!--  (onClose)="onModalClose()">-->
+<!--  &lt;!&ndash; Nội dung body &ndash;&gt;-->
+<!--  <app-create-product #formContent>-->
+<!--  </app-create-product>-->
+<!--</app-modal>-->

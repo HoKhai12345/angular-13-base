@@ -36,6 +36,7 @@ import {TaskComponent} from "./_components/task/task.component";
 import { ProductsComponent } from './_components/products/products.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CreateProductComponent} from './_components/products/dialog/create/create.component';
+import { DynamicModalComponent } from './components/dynamic-modal/dynamic-modal.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { CreateProductComponent} from './_components/products/dialog/create/crea
     TaskListComponent,
     ProductsComponent,
     ModalComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    DynamicModalComponent
   ],
     imports: [
         BrowserModule,

@@ -54,7 +54,7 @@ const routes: Routes = [
         path: 'products',
         component: ProductsComponent,
         data: { preload: true },
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       }
     ],
   },

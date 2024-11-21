@@ -3,7 +3,7 @@ import {
   AfterViewInit,
   Component,
   ContentChild,
-  ElementRef,
+  ElementRef, Inject,
   OnDestroy,
   OnInit,
   ViewChild
@@ -12,6 +12,7 @@ import {IProduct, ProductsService} from "../../_services/products/products.servi
 import {Subscription} from "rxjs";
 import {FormGroup} from "@angular/forms";
 import {CreateProductComponent} from "./dialog/create/create.component";
+import {DynamicModalService} from "../../_services/dynamic-modal/dynamic-modal.service";
 
 declare global {
   interface Window {
@@ -31,6 +32,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private productService: ProductsService,
+    private modalService: DynamicModalService
   ) {
 
   }
@@ -57,6 +59,10 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription.unsubscribe();
   }
 
+  openModal() {
+    this.modalService.openModal(CreateProductComponent, 'Dynamic Modal Title', { example: 'Example Data' });
+  }
+
   private cleanupBackdrop(): void {
     const backdrop = document.querySelector('.modal-backdrop');
     if (backdrop) {
@@ -76,7 +82,16 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   onSaveCreate() {
     const formData = this.formContent.getDataForm();
     console.log("formData", formData);
-    this.productService.addProduct(formData);
+    const product: IProduct = {
+      color: "red",
+      id: Date.now(),
+      name: formData?.name,
+      price: formData?.price,
+      complete: false,
+      createdAt: this.productService.formatDate(),
+      updatedAt: this.productService.formatDate()
+    }
+    this.productService.addProduct(product);
     this.onModalClose();
   }
 
@@ -103,6 +118,8 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
   }
+
+
 
   addProduct(): void {
     const product: IProduct = {

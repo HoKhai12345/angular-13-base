@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoginService } from './login/login.service';
-import { loginFailure, loginSuccess } from '../../store/actions/auth.actions';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
 interface Result {
@@ -33,7 +32,7 @@ export class AuthService {
         result.data?.refreshToken ? localStorage.setItem('refreshToken', result.data.refreshToken) : '';
         }
       }),
-      map((result) => result), // Trả về true nếu loginResult tồn tại, ngược lại là false
+      map((result) => result),
       catchError((error) => {
         console.error('Đăng nhập thất bại', error);
         return of(null);
@@ -62,7 +61,7 @@ export class AuthService {
           return result.accessToken;
         }
       }),
-      map((loginResult) => !!loginResult), // Trả về true nếu loginResult tồn tại, ngược lại là false
+      map((loginResult) => !!loginResult),
       catchError((error) => {
         console.log("error", error);
         this.logout();
@@ -127,7 +126,7 @@ export class AuthService {
     }),
     catchError((error) => {
       console.error("Error verifying token", error);
-      return of(false); // Return false in case of error
+      return of(false);
     })
   );
   }

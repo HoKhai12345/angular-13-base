@@ -12,6 +12,6 @@ export class VisualizeService {
 
 
   setVisualize(type: string) {
-    this.visualizeSubject.next(type); // Phát loại visualize mới
+    this.visualizeSubject.next(type);
   }
 }

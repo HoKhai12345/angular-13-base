@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProductsService} from "../../../../_services/products/products.service";
 import { debounceTime} from "rxjs";
@@ -10,9 +10,12 @@ import { debounceTime} from "rxjs";
 })
 export class CreateProductComponent implements OnInit {
   formCreate!: FormGroup;
+  @Output() save = new EventEmitter<any>();
+  @Output() close = new EventEmitter<any>();
   constructor(
     private productService: ProductsService,
     private formBuilder: FormBuilder,
+    @Inject('data') public data: any
   ) {}
   ngOnInit(): void {
     this.initFormCreate();
@@ -25,6 +28,18 @@ export class CreateProductComponent implements OnInit {
       price: [1000, [Validators.required, Validators.minLength(1000), Validators.maxLength(1000000)]],
       status: [true],
     })
+  }
+
+  saveData() {
+    this.save.emit(this.formCreate.value); // Emit dữ liệu khi nhấn Save
+  }
+
+  closeModal() {
+    this.close.emit();
+  }
+
+  logSomething() {
+    console.log('Child component action', this.data);
   }
 
   eventChangeForm(): void {
