@@ -7,26 +7,35 @@ import {Global} from "../../global";
 import {TestService} from "../../_services/test/test.service";
 import {Subject} from "rxjs";
 import {HeaderModel} from "../../models/header.model";
+import {MatDialog} from "@angular/material/dialog";
+import {UserInfoDialogComponent} from "../dialog/user-info/user-info.component";
+import {BaseComponent} from "../base-component/base-component.component";
 
 @Component({
   selector: 'app-site-header',
   templateUrl: './site-header.component.html',
   styleUrls: ['./site-header.component.css']
 })
-export class SiteHeaderComponent implements OnInit {
+export class SiteHeaderComponent extends BaseComponent implements OnInit {
   title = 'Main Layout';
   channelItem: ChannelModel[] = [];
   subject: any;
   listHeader = Global.listHeader;
   header: HeaderModel[] | undefined = Global.listHeader;
-  constructor(private authService: AuthService, private testService: TestService, private channelService: ChannelService, private alertService: AlertService) {
+  constructor(
+    private dialog: MatDialog,
+    authService: AuthService,
+    private testService: TestService,
+    private channelService: ChannelService,
+    private alertService: AlertService) {
+    super(authService);
     this.testService.headerItems$.subscribe(headerItems => {
-      console.log("headerItems", headerItems);
       this.header = this.testService.getHeader();
     })
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this.testService.setHeader(this.listHeader);
     this.header = this.testService.getHeader();
     this.channelService.channelItems$.subscribe((items) => {
@@ -36,6 +45,18 @@ export class SiteHeaderComponent implements OnInit {
         console.log("result", result);
         this.subject = result;
     })
+  }
+
+  openInfoUser() {
+    console.log("_________", this.infoUser);
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, {
+      width: '500px',
+      data: { info: this.infoUser },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Kết quả sau khi đóng dialog:', result);
+    });
   }
 
   signOut() {

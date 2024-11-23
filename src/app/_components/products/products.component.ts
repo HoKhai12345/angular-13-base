@@ -13,6 +13,8 @@ import {Subscription} from "rxjs";
 import {FormGroup} from "@angular/forms";
 import {CreateProductComponent} from "./dialog/create/create.component";
 import {DynamicModalService} from "../../_services/dynamic-modal/dynamic-modal.service";
+import {BaseComponent} from "../../components/base-component/base-component.component";
+import {AuthService} from "../../service/auth.service";
 
 declare global {
   interface Window {
@@ -24,7 +26,7 @@ declare global {
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductsComponent extends BaseComponent implements OnInit, OnDestroy, AfterViewInit {
   products: IProduct[] = [];
   titleCreateProduct: string = "Create product";
   @ViewChild('formContent') formContent!: CreateProductComponent;
@@ -32,12 +34,14 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private productService: ProductsService,
-    private modalService: DynamicModalService
+    private modalService: DynamicModalService,
+    authService: AuthService
   ) {
-
+    super(authService)
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit()
     this.subscription.add(
       this.productService.filteredProducts$.subscribe((pr) => {
           this.products = pr;

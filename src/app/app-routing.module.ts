@@ -11,6 +11,7 @@ import { ChannelComponent } from './_components/channel/channel.component';
 import {TaskListComponent} from "./_components/task/task-list/task-list.component";
 import {TaskComponent} from "./_components/task/task.component";
 import {ProductsComponent} from "./_components/products/products.component";
+import {RoleGuard} from "./auth/role.guard";
 
 const routes: Routes = [
   {
@@ -21,6 +22,19 @@ const routes: Routes = [
   {
     path: 'error-404',
     component: Error404Component,
+  },
+  {
+    path: 'admin',
+    component: UsersComponent,
+    data: {preload: true},
+    canActivateChild: [AuthGuard, RoleGuard],
+    children: [
+      {
+        path: 'user',
+        component: UsersComponent,
+        data: { preload: true },
+      }
+    ]
   },
   {
     path: '',

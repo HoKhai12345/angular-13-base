@@ -10,7 +10,7 @@ export class DynamicModalComponent implements OnInit {
   @Input() childInjector!: any; // Injector truyền dữ liệu vào childComponent
   @Output() close = new EventEmitter<void>(); // Sự kiện đóng modal
   @Output() saveChanges = new EventEmitter<void>(); // Sự kiện lưu
-  @Output() save = new EventEmitter<any>(); // Modal emit khi component con emit
+  // @Output() save = new EventEmitter<any>(); // Modal emit khi component con emit
 
 
   constructor() { }
@@ -22,8 +22,9 @@ export class DynamicModalComponent implements OnInit {
     this.close.emit();
   }
 
-  // save() {
-  //   this.saveChanges.emit();
-  // }
+  save() {
+    console.log("vào change");
+    this.saveChanges.emit();
+  }
 
 }

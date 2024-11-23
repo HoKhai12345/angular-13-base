@@ -10,7 +10,7 @@ import { debounceTime} from "rxjs";
 })
 export class CreateProductComponent implements OnInit {
   formCreate!: FormGroup;
-  @Output() save = new EventEmitter<any>();
+  @Output() saveChange = new EventEmitter<any>();
   @Output() close = new EventEmitter<any>();
   constructor(
     private productService: ProductsService,
@@ -31,7 +31,7 @@ export class CreateProductComponent implements OnInit {
   }
 
   saveData() {
-    this.save.emit(this.formCreate.value); // Emit dữ liệu khi nhấn Save
+    this.saveChange.emit(this.formCreate.value); // Emit dữ liệu khi nhấn Save
   }
 
   closeModal() {

@@ -37,6 +37,9 @@ import { ProductsComponent } from './_components/products/products.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CreateProductComponent} from './_components/products/dialog/create/create.component';
 import { DynamicModalComponent } from './components/dynamic-modal/dynamic-modal.component';
+import { BaseComponent } from './components/base-component/base-component.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { UserInfoDialogComponent } from './components/dialog/user-info/user-info.component';
 
 @NgModule({
   declarations: [
@@ -63,11 +66,14 @@ import { DynamicModalComponent } from './components/dynamic-modal/dynamic-modal.
     ProductsComponent,
     ModalComponent,
     CreateProductComponent,
-    DynamicModalComponent
+    DynamicModalComponent,
+    BaseComponent,
+    UserInfoDialogComponent
   ],
     imports: [
         BrowserModule,
         RouterModule,
+        MatDialogModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoginService } from './login/login.service';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 interface Result {
   status: number,
@@ -22,6 +23,19 @@ export class AuthService {
 
   constructor(private router: Router, private loginService: LoginService, private store: Store<{auth: { showLoginPopup: boolean }}>) {}
 
+  getDecodedToken() {
+    const token = this.getAccessToken();
+    if (token) {
+      try {
+        return jwtDecode(token);
+      } catch (error) {
+        console.error('Token không hợp lệ:', error);
+        return null;
+      }
+    }
+    return null;
+  }
+
 
   login(dataLogin: { username: string; password: string }): Observable<Result | null> {
     return this.loginService.login(dataLogin).pipe(
@@ -39,6 +53,7 @@ export class AuthService {
       })
     );
   }
+
 
   setTokens(accessToken: string, refreshToken: string) {
     localStorage.setItem('accessToken', accessToken);

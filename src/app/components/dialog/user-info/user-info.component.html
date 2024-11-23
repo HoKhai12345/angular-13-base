@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>User info</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-12 text-center info">
+      <img class="box-thumbnail text-center" src="https://media.baobinhphuoc.com.vn/upload/news/4_2024/145ffd68974fae436c662b25e2ad5145.jpg">
+      <label class="mr-2 font-weight-bold">
+        Name: {{ data?.info?.username }}
+      </label>
+      <span class="badge badge-primary">{{ data?.info?.role?.name }}</span>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Đóng</button>
+  <button mat-button color="primary" (click)="cancel()">Xác nhận</button>
+</mat-dialog-actions>

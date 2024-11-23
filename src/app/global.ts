@@ -17,7 +17,7 @@ export const Global = {
       {
         "label": "User",
         "icon": "fas fa-users",
-        "link": 'user',
+        "link": 'admin/user',
         "value": 'user'
       },
       {

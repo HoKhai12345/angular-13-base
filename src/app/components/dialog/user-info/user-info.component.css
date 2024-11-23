@@ -1,0 +1,5 @@
+::ng-deep app-user-info-dialog {
+  .info {
+    border-radius: 12px;
+  }
+}
