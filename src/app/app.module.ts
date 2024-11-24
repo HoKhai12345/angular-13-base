@@ -40,6 +40,10 @@ import { DynamicModalComponent } from './components/dynamic-modal/dynamic-modal.
 import { BaseComponent } from './components/base-component/base-component.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { UserInfoDialogComponent } from './components/dialog/user-info/user-info.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatTableModule} from "@angular/material/table";
+import {MatOption, MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -83,8 +87,12 @@ import { UserInfoDialogComponent } from './components/dialog/user-info/user-info
         MatCheckboxModule,
         MatButtonModule,
         MatInputModule,
+        MatPaginatorModule,
         StoreModule.forRoot({auth: authReducer}),
-        MatCardModule
+        MatCardModule,
+        MatTableModule,
+        MatOptionModule,
+        MatSelectModule
     ],
   providers: [
     {

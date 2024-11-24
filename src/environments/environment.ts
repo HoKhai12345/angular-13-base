@@ -12,7 +12,7 @@ export const environment = {
         verifyToken: 'verify-token',
         refreshToken: 'refresh-token',
         user: {
-          getList: 'news/users/index'
+          getList: 'admin/users/index'
         },
         channel: {
           getList: 'channel/get-all'

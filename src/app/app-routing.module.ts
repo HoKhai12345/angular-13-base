@@ -25,9 +25,10 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: UsersComponent,
+    component: MainLayoutComponent,
     data: {preload: true},
-    canActivateChild: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard],
+    canActivateChild: [RoleGuard],
     children: [
       {
         path: 'user',

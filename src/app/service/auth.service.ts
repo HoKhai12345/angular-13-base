@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { LoginService } from './login/login.service';
 import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import {CustomJwtPayload} from "../interface/custom-jwt-payload";
 
 interface Result {
   status: number,
@@ -27,7 +28,8 @@ export class AuthService {
     const token = this.getAccessToken();
     if (token) {
       try {
-        return jwtDecode(token);
+        const user: CustomJwtPayload =  jwtDecode<CustomJwtPayload>(token);
+        return user
       } catch (error) {
         console.error('Token không hợp lệ:', error);
         return null;

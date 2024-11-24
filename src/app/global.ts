@@ -7,36 +7,47 @@ export const Global = {
       '/api/verify-token'
     ],
     timeout: 5000, // Thời gian timeout cho các request
-    listHeader: [
-      {
-        "label": "Dashboard",
-        "icon": "fas fa-th",
-        "link": 'dashboard',
-        "value": 'dashboard'
-      },
-      {
-        "label": "User",
-        "icon": "fas fa-users",
-        "link": 'admin/user',
-        "value": 'user'
-      },
-      {
-        "label": "Channel",
-        "icon": "fas fa-home",
-        "link": 'channel',
-        "value": 'channel'
-      },
-      {
-        "label": "Task",
-        "icon": "fas fa-home",
-        "link": 'task',
-        "value": 'task'
-      },
-      {
-        "label": "Product",
-        "icon": "fa-brands fa-product-hunt",
-        "link": 'products',
-        "value": 'products'
-      }
-    ]
+    listHeaders: {
+      admin: [
+        {
+          "label": "User",
+          "icon": "fas fa-users",
+          "link": '/admin/user',
+          "value": 'user'
+        },
+      ],
+      user: [
+        {
+          "label": "Dashboard",
+          "icon": "fas fa-th",
+          "link": '/dashboard',
+          "value": 'dashboard',
+          "children": []
+        },
+        // {
+        //   "label": "Channel",
+        //   "icon": "fas fa-home",
+        //   "link": '/channel',
+        //   "value": 'channel',
+        //   "children": []
+        // },
+        // {
+        //   "label": "Task",
+        //   "icon": "fas fa-home",
+        //   "link": '/task',
+        //   "value": 'task',
+        //   "children": []
+        // },
+        // {
+        //   "label": "Product",
+        //   "icon": "fa-brands fa-product-hunt",
+        //   "link": '/products',
+        //   "value": 'products',
+        //   "children": []
+        // },
+      ]
+    },
+    listRole: {
+
+    }
   };

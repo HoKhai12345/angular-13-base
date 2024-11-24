@@ -2,9 +2,9 @@
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 
 
-* {
-    border-radius: 5px;
-  }
+/** {*/
+/*    border-radius: 5px;*/
+/*  }*/
 
   body {
     /*background: radial-gradient(#f70303, transparent);*/
@@ -31,6 +31,65 @@
     min-height: 80vh;
   }
 
+  .table-custom {
+    .table-wrapper {
+      max-height: 500px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    table {
+      border-spacing: 0;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    tbody {
+      scrollbar-width: thin;
+      display: block;
+      max-height: 400px;
+      overflow-y: auto;
+      width: 100%;
+    }
+
+    tr {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    tbody {
+      tr {
+        border-bottom: whitesmoke solid 2px;
+        background: white;
+        td {
+          color: black;
+        }
+      }
+    }
+
+    mat-paginator {
+      margin-top: auto;
+      z-index: 1;
+    }
+  }
+
+  .w-10 {
+    width: 10% !important;
+  }
+
+
+  .custom-select-material {
+    background-color: #f0f0f0 !important; /* Nền màu xám nhạt */
+    color: #333; /* Màu chữ */
+  }
+
   /*[class*='container'] {*/
   /*  border: 1px dashed #eee;*/
   /*  background-clip: content-box;*/
@@ -42,7 +101,7 @@
 }
 
   .row [class*='col'] {
-     background-color: #efefef;
+     background-color: #dbdde0;
     background-clip: content-box;
   }
 
