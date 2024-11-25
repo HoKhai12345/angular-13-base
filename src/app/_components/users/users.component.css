@@ -1,1 +1,16 @@
-::ng-deep app-admin-users {}
+::ng-deep app-admin-users {
+
+  .cdk-column-id {
+    width: 100px;
+  }
+
+  .cdk-column-name {
+    width: 300px;
+  }
+
+  .cdk-column-action {
+    width: 300px;
+    text-align: end;
+  }
+
+}

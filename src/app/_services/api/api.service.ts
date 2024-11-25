@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -12,8 +12,9 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
    // GET request
-   get(path: string, options: any): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${path}`, options);
+   get(path: string, params: any): Observable<any> {
+    console.log("___________", params);
+    return this.http.get(`${this.apiUrl}/${path}`, {params} );
   }
 
   // POST request

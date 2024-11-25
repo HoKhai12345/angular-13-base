@@ -5,12 +5,14 @@ export class UserModel {
   name: string | undefined;
   username: string | undefined;
   email: string | undefined;
+  status: number | undefined;
   role: RolesModel | null;
   constructor(data: any) {
     this.id = data.id ?? null;
     this.name = data?.name ?? null;
     this.username = data?.username ?? null;
     this.email = data?.email ?? null;
+    this.status = data?.status ?? 0;
     this.role = data?.role ? new RolesModel(data?.role) : null;
   }
 }
