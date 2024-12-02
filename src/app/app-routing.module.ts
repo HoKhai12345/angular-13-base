@@ -12,6 +12,7 @@ import {TaskListComponent} from "./_components/task/task-list/task-list.componen
 import {TaskComponent} from "./_components/task/task.component";
 import {ProductsComponent} from "./_components/products/products.component";
 import {RoleGuard} from "./auth/role.guard";
+import { DynamicTableComponent } from './_components/admin/dynamic-table/dynamic-table.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,11 @@ const routes: Routes = [
       {
         path: 'user',
         component: UsersComponent,
+        data: { preload: true },
+      },
+      {
+        path: 'dynamic-table',
+        component: DynamicTableComponent,
         data: { preload: true },
       }
     ]

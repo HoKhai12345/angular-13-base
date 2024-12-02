@@ -44,7 +44,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
 import {MatOption, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-
+import { DynamicTableComponent } from './_components/admin/dynamic-table/dynamic-table.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +72,8 @@ import {MatSelectModule} from "@angular/material/select";
     CreateProductComponent,
     DynamicModalComponent,
     BaseComponent,
-    UserInfoDialogComponent
+    UserInfoDialogComponent,
+    DynamicTableComponent
   ],
     imports: [
         BrowserModule,
